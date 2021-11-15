@@ -27,7 +27,7 @@ public class Derivative extends AbstractInstrument {
      * Базовый инструмент (на который этот дериватив)
      */
     @JsonIdentityReference(alwaysAsId = true)
-    private AbstractInstrument baseInstrument;
+    private final AbstractInstrument baseInstrument;
 
     @Nullable
     private final LocalDate expireDate;
@@ -37,9 +37,10 @@ public class Derivative extends AbstractInstrument {
             @NotNull final InstrumentType type,
             @Nullable final String internalShortName,
             @Nullable final String internalFullName,
-            @Nullable final LocalDate expireDate
+            AbstractInstrument baseInstrument, @Nullable final LocalDate expireDate
     ) {
         super(guid, type, internalShortName, internalFullName);
+        this.baseInstrument = baseInstrument;
         this.expireDate = expireDate;
     }
 }

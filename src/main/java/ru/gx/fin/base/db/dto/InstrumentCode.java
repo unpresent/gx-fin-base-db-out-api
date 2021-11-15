@@ -42,7 +42,7 @@ public class InstrumentCode extends AbstractDataObject {
     /**
      * Порядковый номер кода (для случаев, когда провайдер о данном инструменте транслирует несколько кодов)
      */
-    private final int index;
+    private final short index;
 
     /**
      * Дата, начиная с которой данный код начал действовать
@@ -60,7 +60,7 @@ public class InstrumentCode extends AbstractDataObject {
             @NotNull final Provider provider,
             @NotNull final String code,
             @Nullable final String name,
-            int index,
+            short index,
             @Nullable final LocalDate dateFrom,
             @Nullable final LocalDate dateTo
     ) {
