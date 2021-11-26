@@ -1,4 +1,4 @@
-package ru.gx.fin.base.db.dto;
+package ru.gx.fin.core.dris.out;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;

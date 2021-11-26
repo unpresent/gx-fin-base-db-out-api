@@ -1,4 +1,4 @@
-package ru.gx.fin.base.db.dto;
+package ru.gx.fin.core.dris.out;
 
 /**
  * Направления сделок

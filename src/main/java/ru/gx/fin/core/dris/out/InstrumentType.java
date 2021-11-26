@@ -1,4 +1,4 @@
-package ru.gx.fin.base.db.dto;
+package ru.gx.fin.core.dris.out;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import ru.gx.data.AbstractDataObject;
 
 /**
- * Тип провайдера
+ * Тип ФИ
  */
 @Getter
 @Setter
@@ -20,42 +20,50 @@ import ru.gx.data.AbstractDataObject;
 @EqualsAndHashCode(callSuper = true, of = "code")
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProviderType extends AbstractDataObject {
+public class InstrumentType extends AbstractDataObject {
     /**
      * Родительсткий тип самого верхнего уровня
      */
     @JsonIdentityReference(alwaysAsId = true)
     @Nullable
-    private final ProviderType rootType;
+    private final InstrumentType rootType;
 
     /**
-     * Родительсткий тип провайдера
+     * Родительсткий тип ФИ
      */
     @JsonIdentityReference(alwaysAsId = true)
     @Nullable
-    private final ProviderType parent;
+    private final InstrumentType parent;
 
     /**
-     * Код типа провайдера
+     * Код ФИ
      */
     @NotNull
     private final String code;
 
     /**
-     * Название типа провайдера
+     * Краткое название типа ФИ
      */
     @Nullable
-    private final String name;
+    private final String nameShort;
 
-    public ProviderType(
-            @Nullable final ProviderType rootType,
-            @Nullable final ProviderType parent,
+    /**
+     * Полное название типа ФИ
+     */
+    @Nullable
+    private final String nameFull;
+
+    public InstrumentType(
+            @Nullable final InstrumentType rootType,
+            @Nullable final InstrumentType parent,
             @NotNull final String code,
-            @Nullable final String name
+            @Nullable final String nameShort,
+            @Nullable final String nameFull
     ) {
         this.rootType = rootType;
         this.parent = parent;
         this.code = code;
-        this.name = name;
+        this.nameShort = nameShort;
+        this.nameFull = nameFull;
     }
 }

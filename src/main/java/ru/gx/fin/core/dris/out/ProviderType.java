@@ -1,4 +1,4 @@
-package ru.gx.fin.base.db.dto;
+package ru.gx.fin.core.dris.out;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import ru.gx.data.AbstractDataObject;
 
 /**
- * Тип ФИ
+ * Тип провайдера
  */
 @Getter
 @Setter
@@ -20,50 +20,42 @@ import ru.gx.data.AbstractDataObject;
 @EqualsAndHashCode(callSuper = true, of = "code")
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class InstrumentType extends AbstractDataObject {
+public class ProviderType extends AbstractDataObject {
     /**
      * Родительсткий тип самого верхнего уровня
      */
     @JsonIdentityReference(alwaysAsId = true)
     @Nullable
-    private final InstrumentType rootType;
+    private final ProviderType rootType;
 
     /**
-     * Родительсткий тип ФИ
+     * Родительсткий тип провайдера
      */
     @JsonIdentityReference(alwaysAsId = true)
     @Nullable
-    private final InstrumentType parent;
+    private final ProviderType parent;
 
     /**
-     * Код ФИ
+     * Код типа провайдера
      */
     @NotNull
     private final String code;
 
     /**
-     * Краткое название типа ФИ
+     * Название типа провайдера
      */
     @Nullable
-    private final String nameShort;
+    private final String name;
 
-    /**
-     * Полное название типа ФИ
-     */
-    @Nullable
-    private final String nameFull;
-
-    public InstrumentType(
-            @Nullable final InstrumentType rootType,
-            @Nullable final InstrumentType parent,
+    public ProviderType(
+            @Nullable final ProviderType rootType,
+            @Nullable final ProviderType parent,
             @NotNull final String code,
-            @Nullable final String nameShort,
-            @Nullable final String nameFull
+            @Nullable final String name
     ) {
         this.rootType = rootType;
         this.parent = parent;
         this.code = code;
-        this.nameShort = nameShort;
-        this.nameFull = nameFull;
+        this.name = name;
     }
 }
