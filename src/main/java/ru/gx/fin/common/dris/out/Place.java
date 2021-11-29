@@ -1,4 +1,4 @@
-package ru.gx.fin.core.dris.out;
+package ru.gx.fin.common.dris.out;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
@@ -8,7 +8,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.gx.data.AbstractDataObject;
+import ru.gx.core.data.AbstractDataObject;
 
 @Getter
 @Setter

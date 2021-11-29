@@ -1,4 +1,4 @@
-package ru.gx.fin.core.dris.out;
+package ru.gx.fin.common.dris.out;
 
 /**
  * Направления сделок
