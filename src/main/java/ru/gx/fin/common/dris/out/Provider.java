@@ -1,7 +1,6 @@
 package ru.gx.fin.common.dris.out;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +9,7 @@ import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.gx.core.data.AbstractDataObject;
+import ru.gx.fin.common.dris.memdata.ProvidersMemoryRepository;
 
 /**
  * Провайдеры
@@ -20,6 +20,7 @@ import ru.gx.core.data.AbstractDataObject;
 @EqualsAndHashCode(callSuper = true, of = "code")
 @Accessors(chain = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(property = "code", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = ProvidersMemoryRepository.IdResolver.class)
 public class Provider extends AbstractDataObject {
     /**
      * Код
@@ -47,11 +48,12 @@ public class Provider extends AbstractDataObject {
     @Nullable
     private final Place place;
 
+    @JsonCreator
     public Provider(
-            @NotNull final String code,
-            @Nullable final String name,
-            @NotNull final ProviderType type,
-            @Nullable final Place place
+            @JsonProperty("code") @NotNull final String code,
+            @JsonProperty("name") @Nullable final String name,
+            @JsonProperty("type") @NotNull final ProviderType type,
+            @JsonProperty("place") @Nullable final Place place
     ) {
         this.code = code;
         this.name = name;

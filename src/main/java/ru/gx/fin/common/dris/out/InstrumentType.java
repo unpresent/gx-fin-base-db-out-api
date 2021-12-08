@@ -1,7 +1,6 @@
 package ru.gx.fin.common.dris.out;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +9,7 @@ import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.gx.core.data.AbstractDataObject;
+import ru.gx.fin.common.dris.memdata.InstrumentTypesMemoryRepository;
 
 /**
  * Тип ФИ
@@ -20,6 +20,7 @@ import ru.gx.core.data.AbstractDataObject;
 @EqualsAndHashCode(callSuper = true, of = "code")
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(property = "code", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = InstrumentTypesMemoryRepository.IdResolver.class)
 public class InstrumentType extends AbstractDataObject {
     /**
      * Родительсткий тип самого верхнего уровня
@@ -53,12 +54,13 @@ public class InstrumentType extends AbstractDataObject {
     @Nullable
     private final String nameFull;
 
+    @JsonCreator
     public InstrumentType(
-            @Nullable final InstrumentType rootType,
-            @Nullable final InstrumentType parent,
-            @NotNull final String code,
-            @Nullable final String nameShort,
-            @Nullable final String nameFull
+            @JsonProperty("rootType") @Nullable final InstrumentType rootType,
+            @JsonProperty("parent") @Nullable final InstrumentType parent,
+            @JsonProperty("code") @NotNull final String code,
+            @JsonProperty("nameShort") @Nullable final String nameShort,
+            @JsonProperty("nameFull") @Nullable final String nameFull
     ) {
         this.rootType = rootType;
         this.parent = parent;

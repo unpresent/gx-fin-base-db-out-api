@@ -1,7 +1,6 @@
 package ru.gx.fin.common.dris.out;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +9,7 @@ import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.gx.core.data.AbstractDataObject;
+import ru.gx.fin.common.dris.memdata.ProviderTypesMemoryRepository;
 
 /**
  * Тип провайдера
@@ -20,6 +20,7 @@ import ru.gx.core.data.AbstractDataObject;
 @EqualsAndHashCode(callSuper = true, of = "code")
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(property = "code", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = ProviderTypesMemoryRepository.IdResolver.class)
 public class ProviderType extends AbstractDataObject {
     /**
      * Родительсткий тип самого верхнего уровня
@@ -47,11 +48,12 @@ public class ProviderType extends AbstractDataObject {
     @Nullable
     private final String name;
 
+    @JsonCreator
     public ProviderType(
-            @Nullable final ProviderType rootType,
-            @Nullable final ProviderType parent,
-            @NotNull final String code,
-            @Nullable final String name
+            @JsonProperty("rootType") @Nullable final ProviderType rootType,
+            @JsonProperty("parent") @Nullable final ProviderType parent,
+            @JsonProperty("code") @NotNull final String code,
+            @JsonProperty("name") @Nullable final String name
     ) {
         this.rootType = rootType;
         this.parent = parent;
