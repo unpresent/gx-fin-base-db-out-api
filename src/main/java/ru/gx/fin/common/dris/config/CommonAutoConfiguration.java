@@ -9,6 +9,10 @@ import ru.gx.fin.common.dris.channels.DrisSnapshotInstrumentTypeDataPublishChann
 import ru.gx.fin.common.dris.channels.DrisSnapshotPlaceDataPublishChannelApiV1;
 import ru.gx.fin.common.dris.channels.DrisSnapshotProviderDataPublishChannelApiV1;
 import ru.gx.fin.common.dris.channels.DrisSnapshotProviderTypeDataPublishChannelApiV1;
+import ru.gx.fin.common.dris.keyextractors.InstrumentTypeKeyExtractor;
+import ru.gx.fin.common.dris.keyextractors.PlaceKeyExtractor;
+import ru.gx.fin.common.dris.keyextractors.ProviderKeyExtractor;
+import ru.gx.fin.common.dris.keyextractors.ProviderTypeKeyExtractor;
 import ru.gx.fin.common.dris.messages.DrisSnapshotInstrumentTypeDataPublish;
 import ru.gx.fin.common.dris.messages.DrisSnapshotPlaceDataPublish;
 import ru.gx.fin.common.dris.messages.DrisSnapshotProviderDataPublish;
@@ -29,10 +33,24 @@ public class CommonAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
+    @ConditionalOnProperty(value = "service.channels-api." + DrisChannelNames.Snapshots.PLACES_V1 + DOT_ENABLED, havingValue = "true")
+    public PlaceKeyExtractor placeKeyExtractor() {
+        return new PlaceKeyExtractor();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(value = "service.channels-api." + DrisChannelNames.Snapshots.PROVIDER_TYPES_V1 + DOT_ENABLED, havingValue = "true")
     public DrisSnapshotProviderTypeDataPublishChannelApiV1 drisSnapshotProviderTypeDataPublishChannelApiV1() {
         DrisSnapshotProviderTypeDataPublish.staticInit();
         return new DrisSnapshotProviderTypeDataPublishChannelApiV1();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(value = "service.channels-api." + DrisChannelNames.Snapshots.PROVIDER_TYPES_V1 + DOT_ENABLED, havingValue = "true")
+    public ProviderTypeKeyExtractor providerTypeKeyExtractor() {
+        return new ProviderTypeKeyExtractor();
     }
 
     @Bean
@@ -45,9 +63,23 @@ public class CommonAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
+    @ConditionalOnProperty(value = "service.channels-api." + DrisChannelNames.Snapshots.PROVIDERS_V1 + DOT_ENABLED, havingValue = "true")
+    public ProviderKeyExtractor providerKeyExtractor() {
+        return new ProviderKeyExtractor();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(value = "service.channels-api." + DrisChannelNames.Snapshots.INSTRUMENT_TYPES_V1 + DOT_ENABLED, havingValue = "true")
     public DrisSnapshotInstrumentTypeDataPublishChannelApiV1 drisSnapshotInstrumentTypeDataPublishChannelApiV1() {
         DrisSnapshotInstrumentTypeDataPublish.staticInit();
         return new DrisSnapshotInstrumentTypeDataPublishChannelApiV1();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(value = "service.channels-api." + DrisChannelNames.Snapshots.INSTRUMENT_TYPES_V1 + DOT_ENABLED, havingValue = "true")
+    public InstrumentTypeKeyExtractor instrumentTypeKeyExtractor() {
+        return new InstrumentTypeKeyExtractor();
     }
 }

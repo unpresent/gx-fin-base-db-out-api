@@ -26,7 +26,7 @@ public class DrisSnapshotInstrumentTypeDataPublish
         Arrays.stream(SUPPORTED_VERSIONS).forEach(version ->
                 MessageTypesRegistrator.registerType(
                         MessageKind.DataPublish,
-                        DrisMessageTypes.Snapshots.PLACE,
+                        DrisMessageTypes.Snapshots.INSTRUMENT_TYPE,
                         version,
                         DrisSnapshotInstrumentTypeDataPublish.class,
                         DrisSnapshotInstrumentTypeDataPublishBody.class
