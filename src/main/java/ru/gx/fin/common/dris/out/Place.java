@@ -1,6 +1,8 @@
 package ru.gx.fin.common.dris.out;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +11,6 @@ import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.gx.core.data.AbstractDataObject;
-import ru.gx.fin.common.dris.memdata.PlacesMemoryRepository;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ import ru.gx.fin.common.dris.memdata.PlacesMemoryRepository;
 @EqualsAndHashCode(callSuper = true, of = "code")
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonIdentityInfo(property = "code", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = PlacesMemoryRepository.IdResolver.class)
+// @JsonIdentityInfo(property = "code", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = PlacesMemoryRepository.IdResolver.class)
 public class Place extends AbstractDataObject {
     /**
      * Код.

@@ -1,6 +1,8 @@
 package ru.gx.fin.common.dris.out;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +11,6 @@ import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.gx.core.data.AbstractDataObject;
-import ru.gx.fin.common.dris.memdata.InstrumentTypesMemoryRepository;
 
 /**
  * Тип ФИ
@@ -20,21 +21,21 @@ import ru.gx.fin.common.dris.memdata.InstrumentTypesMemoryRepository;
 @EqualsAndHashCode(callSuper = true, of = "code")
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonIdentityInfo(property = "code", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = InstrumentTypesMemoryRepository.IdResolver.class)
+// @JsonIdentityInfo(property = "code", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = InstrumentTypesMemoryRepository.IdResolver.class)
 public class InstrumentType extends AbstractDataObject {
     /**
      * Родительсткий тип самого верхнего уровня
      */
-    @JsonIdentityReference(alwaysAsId = true)
+    // @JsonIdentityReference(alwaysAsId = true)
     @Nullable
-    private final InstrumentType rootType;
+    private final String rootType;
 
     /**
      * Родительсткий тип ФИ
      */
-    @JsonIdentityReference(alwaysAsId = true)
+    // @JsonIdentityReference(alwaysAsId = true)
     @Nullable
-    private final InstrumentType parent;
+    private final String parent;
 
     /**
      * Код ФИ
@@ -56,8 +57,8 @@ public class InstrumentType extends AbstractDataObject {
 
     @JsonCreator
     public InstrumentType(
-            @JsonProperty("rootType") @Nullable final InstrumentType rootType,
-            @JsonProperty("parent") @Nullable final InstrumentType parent,
+            @JsonProperty("rootType") @Nullable final String rootType,
+            @JsonProperty("parent") @Nullable final String parent,
             @JsonProperty("code") @NotNull final String code,
             @JsonProperty("nameShort") @Nullable final String nameShort,
             @JsonProperty("nameFull") @Nullable final String nameFull
