@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 @SuppressWarnings("unused")
 public class DrisSnapshotProviderDataPublish
-        extends AbstractDataPublish<DrisSnapshotProviderDataPublish.DrisSnapshotProviderDataPublishBody> {
+        extends AbstractMessage<DrisSnapshotProviderDataPublish.DrisSnapshotProviderDataPublishBody> {
     public static final int V1 = 1;
     public static final int[] SUPPORTED_VERSIONS = {V1};
 
@@ -36,7 +36,7 @@ public class DrisSnapshotProviderDataPublish
 
     @JsonCreator
     public DrisSnapshotProviderDataPublish(
-            @JsonProperty("header") @NotNull final DataPublishHeader header,
+            @JsonProperty("header") @NotNull final StandardMessageHeader header,
             @JsonProperty("body") @NotNull final DrisSnapshotProviderDataPublishBody body,
             @JsonProperty("correlation") final @Nullable MessageCorrelation correlation
     ) {
